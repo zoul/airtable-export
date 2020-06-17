@@ -44,12 +44,9 @@ interface GitHubConfig {
   message: string;
 }
 
-function getTargetFileUrl(config: GitHubConfig): string {
-  return `https://api.github.com/repos/${config.user}/${config.repo}/contents/${config.path}`;
-}
-
 async function getTargetFileSHA(config: GitHubConfig): Promise<string> {
-  const response = await axios.get(getTargetFileUrl(config));
+  const url = `https://api.github.com/repos/${config.user}/${config.repo}/contents/${config.path}`;
+  const response = await axios.get(url);
   return response.data["sha"];
 }
 
